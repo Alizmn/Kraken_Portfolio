@@ -3,7 +3,20 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   _id: mongoose.Schema.Types.ObjectId,
+  name: {
+    type: String,
+    required: true,
+  },
   username: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: Number,
+    required: false,
+    default: null,
+  },
+  email: {
     type: String,
     required: true,
   },
