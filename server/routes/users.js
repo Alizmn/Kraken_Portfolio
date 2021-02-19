@@ -50,7 +50,13 @@ module.exports = () => {
                     newUser.password = hash;
                     newUser
                       .save()
-                      .then((result) => res.json(result))
+                      .then((result) => {
+                        // --------------------WHAT HAPPENS AFTER REGISTERATION------------
+                        passport.authenticate("local", {
+                          successRedirect: "/dashboard",
+                          failureRedirect: "/user/login",
+                        })(req, res, next);
+                      })
                       .catch((error) => {
                         throw error;
                       });

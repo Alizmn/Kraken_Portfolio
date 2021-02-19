@@ -1,8 +1,30 @@
-const User = require("../Schema/userSchema");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 
+const User = require("../Schema/userSchema");
+const Transaction = require("../Schema/transactionSchema");
+
 module.exports = () => {
+  const saveTransactionById = (
+    user_id,
+    transactionType,
+    fiat,
+    crypto,
+    date,
+    baseFiat = null
+  ) => {
+    const transaction = new Transaction({
+      _id: new mongoose.Types.ObjectId(),
+      user_id,
+      transactionType,
+      fiat,
+      crypto,
+      date,
+      baseFiat,
+    });
+    return transaction.save();
+  };
+
   const getUserById = (id) => {
     return User.findOne({ _id: id });
   };
@@ -28,6 +50,7 @@ module.exports = () => {
     return null;
   };
   return {
+    saveTransactionById,
     getUserById,
     createUser,
   };

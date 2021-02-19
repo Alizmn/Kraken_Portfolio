@@ -40,6 +40,6 @@ app.use(passport.session());
 // --------------------------ROUTES-----------------------
 app.use("/", indexRouter);
 app.use("/users", usersRouter({ ...dbHelpers }));
-app.use("/dashboard", ensureAuthenticated, dashboardRouter());
+app.use("/dashboard", ensureAuthenticated, dashboardRouter({ ...dbHelpers }));
 
 module.exports = app;
